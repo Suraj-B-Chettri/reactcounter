@@ -1,16 +1,16 @@
 'use client';
 import { useMemo } from "react";
-
+import ControlButton from "./ControlButton";
 type HistoryItem = { id: number; value: number };
 
-export default function CounterHistory(
-  { history, sum, onClear, onSum }: {
-    history: HistoryItem[];
-    sum: number;
-    onClear: () => void;
-    onSum: (buffer: number) => void;
-  }
-  ) {
+interface HistoryProps {
+  history: HistoryItem[];
+  sum: number
+  onClear: () => void;
+  onSum: (buffer: number) => void;
+}
+
+export default function CounterHistory({ history, sum, onClear, onSum }: HistoryProps) {
     const reversedHistory = useMemo(() => history.toReversed(), [history]);
 
     return (
@@ -18,8 +18,8 @@ export default function CounterHistory(
         {history.length > 0 ? (
           <div>
             <div className="flex justify-end">
-              <button className="w-30 bg-red-700" onClick={onClear}>Clear</button>
-              <button className="w-30 bg-blue-700" onClick={()=> onSum(2)}>Sum</button>
+              <ControlButton label={'Clear'} action={onClear} color={'red'}></ControlButton>
+              <ControlButton label={'Sum'} action={()=> onSum(2)} color={'blue'}></ControlButton>
             </div>
             <div>Total History Sum: {sum} </div>
             <div className="mt-10 p-10 rounded-md border-2 border-solid border-red-500">
