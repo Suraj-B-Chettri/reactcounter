@@ -1,5 +1,6 @@
 'use client';
 import { useCallback, useState } from "react";
+import { logoutAction } from "@/lib/auth-actions";
 import CounterHistory from "./CounterHistory";
 
 type HistoryItem = { id: number; value: number };
@@ -43,8 +44,16 @@ export default function Home() {
   
   return (
     <div className="flex flex-col justify-center pt-10 px-10">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center gap-4">
         <div>Counter value is {count}</div>
+        <form action={logoutAction}>
+          <button
+            type="submit"
+            className="text-sm font-medium text-blue-600 underline-offset-4 hover:underline dark:text-blue-400"
+          >
+            Log out
+          </button>
+        </form>
       </div>
       <br/>
       <button className="w-100 bg-blue-600 text-white hover:bg-blue-700 rounded-sm focus:ring-2 focus:ring-blue-500 focus:ring-offset-4" onClick={increaseCounter}>
